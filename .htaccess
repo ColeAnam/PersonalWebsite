@@ -1,0 +1,13 @@
+DirectoryIndex index.html
+Options +FollowSymLinks
+RewriteEngine On
+
+# Redirect /file.html to /file (optional)
+RewriteCond %{THE_REQUEST} \.html [NC]
+RewriteRule ^(.*)\.html$ /$1 [R=301,L]
+
+# Remove .html extension (with index.html exception)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/index\.html$ [NC]
+RewriteRule ^([^\.]+)$ $1.html [NC,L]
